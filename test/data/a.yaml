@@ -1,0 +1,15 @@
+initContainers:
+- args:
+  - -c
+  - base64 --decode /app/config/keystore.p12.base64 > /app/config/keystore/keystore.p12
+  - 测试
+  command:
+  - bash
+  image: ubuntu:16.04
+  name: prepare-keystore
+  volumeMounts:
+  - mountPath: /app/config/keystore.p12.base64
+    name: configmap
+    subPath: keystore.p12.base64
+  - mountPath: /app/config/keystore
+    name: keystore-dir
